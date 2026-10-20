@@ -1,0 +1,26 @@
+<article class="card">
+  <div class="photo">
+    <img *ngIf="pet.imageUrl; else placeholder" class="image" [src]="pet.imageUrl" [alt]="pet.name" />
+    <ng-template #placeholder>
+      <span class="placeholder">фото питомца</span>
+    </ng-template>
+
+    <span *ngIf="pet.urgent" class="tag">срочно</span>
+
+    <button
+      type="button"
+      class="favorite"
+      [attr.aria-pressed]="isFavorite"
+      [attr.aria-label]="isFavorite ? 'Убрать из избранного' : 'Добавить в избранное'"
+      (click)="toggleFavorite()"
+    >
+      <img [src]="isFavorite ? 'assets/icons/heart-filled.svg' : 'assets/icons/heart.svg'" alt="" />
+    </button>
+  </div>
+
+  <div class="body">
+    <h3 class="name">{{ pet.name }}</h3>
+    <p class="description">{{ pet.description }}</p>
+    <button type="button" class="view-button" (click)="onView()">Смотреть анкету</button>
+  </div>
+</article>

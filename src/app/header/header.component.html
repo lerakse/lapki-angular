@@ -1,0 +1,16 @@
+<header class="header">
+  <img class="logo" src="assets/icons/logo.svg" alt="Лапки" />
+
+  <nav class="nav">
+    <button
+      *ngFor="let item of navItems"
+      type="button"
+      class="nav-item"
+      [class.active]="item.label === activeItem"
+      [class.accent]="item.accent"
+      (click)="select(item.label)"
+    >
+      {{ item.label }}
+    </button>
+  </nav>
+</header>

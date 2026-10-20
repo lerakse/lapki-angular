@@ -1,59 +1,49 @@
-# LapkiAngular
+# Лапки — Angular (ЛР 3)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.3.
+Базовая структура веб-приложения на Angular для мобильного приложения «Лапки»
+(адаптация и сопровождение животных из приютов с ИИ-ассистентом).
+Компоненты соответствуют макетам из ЛР №1 (Figma).
 
-## Development server
+## Что реализовано
 
-To start a local development server, run:
+- модульная организация (`AppModule`, `@NgModule`);
+- компоненты `HeaderComponent`, `PetListComponent`, `PetCardComponent` (`@Component`);
+- сервис `PetsService` с mock-данными (`@Injectable({ providedIn: 'root' })`);
+- внедрение зависимостей через конструктор, получение данных в `ngOnInit`;
+- вывод списка через `*ngFor`, передача данных в карточку через `@Input`;
+- инкапсулированные стили `*.component.css`, ресурсы из ЛР №1 в `src/assets`.
+
+## Запуск
+
+Нужны Node.js и Angular CLI (`npm install -g @angular/cli`).
 
 ```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Откройте http://localhost:4200. Остановить сервер: Ctrl+C.
+Сборка: `ng build`.
 
-## Code scaffolding
+## Структура
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+src/
+├── assets/
+│   ├── icons/            логотип и сердечки из ЛР №1 (SVG)
+│   └── pets/             фотографии питомцев
+├── app/
+│   ├── app.module.ts     корневой модуль
+│   ├── pet.model.ts      интерфейс Pet
+│   ├── pets.service.ts   PetsService (mock-данные)
+│   ├── header/           HeaderComponent
+│   ├── pet-list/         PetListComponent
+│   └── pet-card/         PetCardComponent
+├── index.html
+└── styles.css            дизайн-токены (цвета, отступы, шрифты)
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Поток данных
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+`PetsService.getPets()` → `PetListComponent` (в `ngOnInit`) → `*ngFor` →
+`<app-pet-card [pet]="pet">` → `PetCardComponent` (`@Input() pet`).

@@ -1,0 +1,9 @@
+<section class="list">
+  <h2 class="title">Питомцы, которым нужен дом</h2>
+
+  <div class="grid">
+    <app-pet-card *ngFor="let pet of pets" [pet]="pet" (view)="onView($event)"></app-pet-card>
+  </div>
+
+  <p *ngIf="lastViewed" class="note">Открыта анкета: {{ lastViewed }}</p>
+</section>
